@@ -1,57 +1,47 @@
 #include <iostream>
+#include <iomanip>
+#include <string>
 using namespace std;
 
-
-double UserValidation(string messege, double value) {
+double UserValidation(string message, double value) {					
 	bool cond;
-	cout << messege;
-	cin >> value;
-	cond = cin.fail(); cin.clear(); cin.ignore(INT_MAX, 'n');
+	cout << message; cin >> value;
+	cond = cin.fail(); cin.clear(); cin.ignore(INT_MAX, '\n');
 	while (cond) {
-		cout << " *INVALID: DATA TYPE* \t: Try Again = ";
-		cin >> value; cond = cin.fail(); cin.clear(); cin.ignore(INT_MAX, 'n');
-	}
+		cout << (" *INVALID: DATA TYPE* ") << "\t: Try Again = ";
+		cin >> value; cond = cin.fail(); cin.clear(); cin.ignore(INT_MAX, '\n');
+	};
 	return value;
 }
 
-struct info
-{
+struct info {
 	string username;
 	string password;
 	string address;
 	int nationalID;
 	int phonenumber;
 };
-
-struct history
-{
+struct history {
 	float balance;
 	float transiction;
 };
 
-struct user_node : public info
-{
-
+struct user_node : public info {
 	float balance;
 	user_node* next_user_acc;
 	history* hist;
-	user_node()
-	{
+	user_node() {
 		nationalID = 0;
 		phonenumber = 0;
 		next_user_acc = NULL;
 		hist = NULL;
 	}
 };
-
-struct admin_node :private info
-{
-
+struct admin_node :private info {
 	admin_node* next_admin_acc;
 };
-struct user : public info
-{
 
+struct user : public info {
 	user_node* head;
 	user()
 	{
@@ -94,8 +84,8 @@ struct user : public info
 		/*UserVAlidation<string>("enter your username ", user1);
 		UserVAlidation<string>("enter your password ", pass);
 		UserVAlidation<string>("enter your address ", address1);*/
-		UserVAlidation("enter your nationalid ", ID);
-		UserVAlidation("enter your phonenumber ", number);
+		ID = UserValidation("enter your nationalid ", ID);
+		UserValidation("enter your phonenumber ", number);
 
 		if (Is_national_id_already_exist(ID) == false)
 		{
